@@ -1,0 +1,17 @@
+import re
+import nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
+# Download necessary NLTK data
+nltk.download('stopwords')
+nltk.download('punkt')
+
+# Preprocessing function
+def preprocess_text(text):
+    text = text.lower()  # Convert to lowercase
+    text = re.sub(r'\W', ' ', text)  # Remove special characters
+    text = re.sub(r'\d+', '', text)  # Remove numbers
+    words = word_tokenize(text)  # Tokenize words
+    words = [word for word in words if word not in stopwords.words('english')]  # Remove stopwords
+    return " ".join(words)
